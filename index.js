@@ -13,6 +13,7 @@ app.post('/webhook',(req, res) =>{
             // Gets the message. entry.messaging is an array, but 
             // will only ever contain one message, so we get index 0
             let webhookEvent = entry.messaging[0];
+            console.log(ActivitiesBot)
             //get sender_psid
             let sender_psid = webhookEvent.sender.id;
 

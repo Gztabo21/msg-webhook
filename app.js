@@ -1,4 +1,6 @@
 const request = require('request');
+module.exports = { handleMessage,handlePostback};
+
   // Handles messages events
 function handleMessage(sender_psid, received_message) {
 
@@ -6,7 +8,7 @@ function handleMessage(sender_psid, received_message) {
     if(received_message.text){
         res = {"text": `You sent the message: "${received_message.text}". Now send me an image!`}
     }
-    callSendAPI(sender_psid, response);
+    callSendAPI(sender_psid, res);
 }
 
 // Handles messaging_postbacks events
