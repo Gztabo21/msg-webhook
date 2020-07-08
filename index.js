@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser'); 
-
+const  ActivitiesBot = require('./app');
 const app = express().use(bodyParser.json());
 
 //endpoint
@@ -13,7 +13,15 @@ app.post('/webhook',(req, res) =>{
             // Gets the message. entry.messaging is an array, but 
             // will only ever contain one message, so we get index 0
             let webhookEvent = entry.messaging[0];
-            console.log(webhookEvent);
+            //get sender_psid
+            let sender_psid = webhook_event.sender.id;
+
+            if(webhookEvent.message){
+                ActivitiesBot.handleMessage(sender_psid, webhook_event.message);
+            }else if(webhook_event.postback){
+                ActivitiesBot.handlePostback(sender_psid, webhook_event.postback);
+            }
+           
         });
         res.status(200).send('EVENT_RECEIVED');
 
@@ -45,7 +53,8 @@ app.get('/webhook',(req,res) => {
         res.sendStatus(403);      
         }
     }
-
+    /* frase  EAAIGqyE2bJEBAMdg0hGMzVcmykINsUdcGsZCFXDUalWW7cu1XPthhkZAR8OOMYezZAolZBhytFkKRLZBfWUAAgESA0KpmwL4rFNpIpUAmN4SsS85EDa1lOslNNbZAkqt9uZB4OFntfMcLUNW8yx426BLyISdnIBXAga4eXc6BZBqqQZDZD */
+    /* EAAIGqyE2bJEBAMcfXd6GZBXDFIoZC1ZCSMtsxpED4vRxAz4NW40Tj1bLAZBMDRmZByD6ks3PZBv8hSkNoGuPDvX5dmTTs9QqMouJciYkzyU6SUuhDZCD1wZAnuPJaIp8WZCsie0fSJCSZAdDTyS82OIQXS5OX1VHYRMbi0sCc3uk8zWQZDZD */
 });
 
 // Sets server port and logs message on success
