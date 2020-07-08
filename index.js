@@ -58,4 +58,4 @@ app.get('/webhook',(req,res) => {
 });
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337,()=>console.log('server is listening 1337'));
+app.listen(process.env.PORT || 1337,()=>console.log('server is online'));
