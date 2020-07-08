@@ -14,7 +14,7 @@ app.post('/webhook',(req, res) =>{
             // will only ever contain one message, so we get index 0
             let webhookEvent = entry.messaging[0];
             //get sender_psid
-            let sender_psid = webhook_event.sender.id;
+            let sender_psid = webhookEvent.sender.id;
 
             if(webhookEvent.message){
                 ActivitiesBot.handleMessage(sender_psid, webhookEvent.message);
